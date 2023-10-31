@@ -30,17 +30,19 @@ cube.position.y = 2;
 cube.position.z = -2;
 scene.add(cube);
 
-const planeGeometry = new THREE.PlaneGeometry(1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
-const plane = new THREE.Mesh(planeGeometry, material);
-plane.position.x = 0;
-plane.position.y = 0;
-plane.position.z = -2;
-plane.rotation.x = Math.PI / 2; // 90 degrees
-plane.scale.x = 5;
-plane.scale.y = 5;
-plane.scale.z = 5;
-scene.add(plane);
+// Create the floor geometry
+const floorGeometry = new THREE.PlaneGeometry(20, 20);
+
+// Create the floor material
+const floorMaterial = new THREE.MeshLambertMaterial({
+    color: 0xffff00
+});
+
+// Create the floor mesh
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.position.y = 0;
+floor.rotation.x = -Math.PI / 2;
+scene.add(floor);
 
 // Set up the ambient light
 const ambientLight = new THREE.AmbientLight(0x202020);
