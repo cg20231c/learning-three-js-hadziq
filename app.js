@@ -38,20 +38,19 @@ const floorMaterial = new THREE.MeshLambertMaterial({
     color: 0xffff00
 });
 
-// Create the floor mesh
-const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.position.y = 0;
-floor.rotation.x = -Math.PI / 2;
-scene.add(floor);
+//yellow mats
+const yellowMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 
-// Set up the ambient light
-const ambientLight = new THREE.AmbientLight(0x202020);
-scene.add(ambientLight);
+//plane geometry
+const planeGeometry = new THREE.PlaneGeometry(5, 5);
 
-// Set up the directional light
-const directionalLight = new THREE.DirectionalLight(0xCCCCCC, 0.5); // Color and intensity
-directionalLight.position.set(0, 1, 0); // Direction
-scene.add(directionalLight);
+// Combine the geometry and mats to create a mesh
+const plane = new THREE.Mesh(planeGeometry, yellowMaterial);
+plane.position.x = 0;
+plane.position.y += 0;
+plane.position.z -= 2;
+plane.rotation.x = -1.5;
+scene.add(plane);
 
 // Set up the point light
 const pointLight = new THREE.PointLight(0xFFFFFF, 1); // Color and intensity
