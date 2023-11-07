@@ -12,7 +12,10 @@ document.body.appendChild(renderer.domElement);
 
 // Load the texture
 const textureLoader = new THREE.TextureLoader();
-const cubeTexture = textureLoader.load('texture1/albedo.jpg');
+const albedoTexture = textureLoader.load('texture1/albedo.jpg');
+const displacementTexture = textureLoader.load('texture1/displacement.jpg');
+const normalsTexture = textureLoader.load('texture1/normals.jpg');
+const roughnessTexture = textureLoader.load('texture1/roughness.jpg');
 
 // Create cube material with texture
 const cubeMaterial = new THREE.MeshPhongMaterial({
@@ -31,26 +34,28 @@ cube.position.z = -2;
 scene.add(cube);
 
 // Create the floor geometry
-const floorGeometry = new THREE.PlaneGeometry(20, 20);
+const floorGeometry = new THREE.PlaneGeometry(5, 5);
 
 // Create the floor material
-const floorMaterial = new THREE.MeshLambertMaterial({
-    color: 0xffff00
+const floorMaterial = new THREE.MeshPhongMaterial({
+    // color: 0xffff00
+    map: albedoTexture,
+    displacementMap: displacementTexture,
+    normalMap: normalsTexture,
+    bumpMap: roughnessTexture
 });
 
-//yellow mats
-const yellowMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-
-//plane geometry
-const planeGeometry = new THREE.PlaneGeometry(5, 5);
-
 // Combine the geometry and mats to create a mesh
-const plane = new THREE.Mesh(planeGeometry, yellowMaterial);
-plane.position.x = 0;
-plane.position.y += 0;
-plane.position.z -= 2;
-plane.rotation.x = -1.5;
-scene.add(plane);
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.position.x = 0;
+floor.position.y += 0;
+floor.position.z -= 2;
+floor.rotation.x = -1.5;
+scene.add(floor);
+
+// Set up an ambient light
+const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+scene.add( light );
 
 // Set up the point light
 const pointLight = new THREE.PointLight(0xFFFFFF, 1); // Color and intensity
