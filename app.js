@@ -33,13 +33,33 @@ const cubeMaterial = new THREE.MeshPhongMaterial({
 // cube.position.z = -2;
 // scene.add(cube);
 
-// Create a doughnut
-const doughnutGeometry = new THREE.TorusGeometry( 1, 0.5, 4, 10 ); 
-const doughnutMaterial = new THREE.MeshPhongMaterial( { color: 0xffff00 } ); 
-const doughnut = new THREE.Mesh( doughnutGeometry, doughnutMaterial ); scene.add( doughnut );
-doughnut.position.x = 0;
-doughnut.position.y = 2;
-doughnut.position.z = -2;
+// // Create a doughnut
+// const doughnutGeometry = new THREE.TorusGeometry( 1, 0.5, 4, 10 ); 
+// const doughnutMaterial = new THREE.MeshPhongMaterial( { color: 0xffff00 } ); 
+// const doughnut = new THREE.Mesh( doughnutGeometry, doughnutMaterial ); scene.add( doughnut );
+// doughnut.position.x = 0;
+// doughnut.position.y = 2;
+// doughnut.position.z = -2;
+
+var gltfLoader = new THREE.GLTFLoader();
+
+gltfLoader.load('rektor.glb', function (gltf) {
+    var model = gltf.scene;
+
+    // // Create a basic material
+    // var material = new THREE.MeshPhongMaterial({ color: 0x00ff00 }); // Green color
+    
+    // // Traverse the model and apply the material to all Mesh objects
+    // model.traverse(function (child) {
+    //     if (child instanceof THREE.Mesh) {
+    //         child.material = material;
+    //     }
+    // });
+
+    scene.add(model);
+}, undefined, function (error) {
+    console.error(error);
+});
 
 // Create the floor geometry
 const floorGeometry = new THREE.PlaneGeometry(5, 5);
@@ -83,9 +103,9 @@ window.addEventListener('resize', () => {
 
 // Render loop
 function animate() {
-    doughnut.rotation.x += 0.01;
-    doughnut.rotation.y += 0.01;
-    doughnut.rotation.z += 0.01;
+    // doughnut.rotation.x += 0.01;
+    // doughnut.rotation.y += 0.01;
+    // doughnut.rotation.z += 0.01;
     
     renderer.render(scene, camera);
 
