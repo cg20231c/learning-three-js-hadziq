@@ -23,15 +23,23 @@ const cubeMaterial = new THREE.MeshPhongMaterial({
     color: 0x00ff00
 });
 
-// Create the cube geometry
-const geometry = new THREE.BoxGeometry(2, 2, 2);
+// // Create the cube geometry
+// const geometry = new THREE.BoxGeometry(2, 2, 2);
 
-// Create the cube mesh
-const cube = new THREE.Mesh(geometry, cubeMaterial);
-cube.position.x = 0;
-cube.position.y = 2;
-cube.position.z = -2;
-scene.add(cube);
+// // Create the cube mesh
+// const cube = new THREE.Mesh(geometry, cubeMaterial);
+// cube.position.x = 0;
+// cube.position.y = 2;
+// cube.position.z = -2;
+// scene.add(cube);
+
+// Create a doughnut
+const doughnutGeometry = new THREE.TorusGeometry( 1, 0.5, 4, 10 ); 
+const doughnutMaterial = new THREE.MeshPhongMaterial( { color: 0xffff00 } ); 
+const doughnut = new THREE.Mesh( doughnutGeometry, doughnutMaterial ); scene.add( doughnut );
+doughnut.position.x = 0;
+doughnut.position.y = 2;
+doughnut.position.z = -2;
 
 // Create the floor geometry
 const floorGeometry = new THREE.PlaneGeometry(5, 5);
@@ -59,7 +67,7 @@ scene.add( light );
 
 // Set up the point light
 const pointLight = new THREE.PointLight(0xFFFFFF, 1); // Color and intensity
-pointLight.position.set(0, 2.5, 2.5); // Position
+pointLight.position.set(0, 1.0, 2.0); // Position
 scene.add(pointLight);
 
 // Handle resize events
@@ -75,9 +83,9 @@ window.addEventListener('resize', () => {
 
 // Render loop
 function animate() {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    cube.rotation.z += 0.01;
+    doughnut.rotation.x += 0.01;
+    doughnut.rotation.y += 0.01;
+    doughnut.rotation.z += 0.01;
     
     renderer.render(scene, camera);
 
